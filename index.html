@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>POST SABUY</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <!-- place navbar here -->
+  </header>
+  <main>
+
+    <div class="container-sm mt-3" style="font-family: 'Kanit', sans-serif;">
+        <div class="my-4 h4">โปรแกรมพิมพ์ใบลาเบล สำหรับขนส่ง POST SABUY</div>
+        <div class="input-group my-3">
+            <span class="input-group-text text-primary" id="basic-addon1">SBT0XXX000000</span>
+            <input id="order_id" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control text-primary" placeholder="XXXX" aria-label="XXXX" aria-describedby="basic-addon1">
+            <button class="input-group-text btn " id="download" disabled>Download</button>
+        </div>
+        <div class="text-danger">* ให้ใส่เลขที่ใบเสร็จรับเงิน (เฉพาะ 4 ตัวท้าย)</div>
+        <div class="text-danger">* ไม่รองรับลาเบลที่มี COD</div>
+        <div class="text-primary">* หากเจอปัญหาไม่สามารถกดโหลดได้ หรือมีข้อผิดพลาด ให้แจ้งเลขทางแชทครับ</div>
+
+    </div>
+
+
+  </main>
+  <footer>
+    <!-- place footer here --> 
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+
+
+
+
+  <script>
+
+
+document.querySelector('#order_id').addEventListener('keyup', async function () {
+    document.querySelector('#download').disabled = true;
+    document.querySelector('#download').classList.remove('btn-success');
+    const order_id = parseInt(this.value)
+    if(order_id>=8000){ this.value=""; return  }
+    if(order_id<=7000){ return }
+    document.querySelector('#download').classList.add('btn-success');
+    document.querySelector('#download').disabled = false;
+})
+
+document.querySelector('#download').addEventListener('click', async function () {
+    const order_id = document.querySelector('#order_id').value
+    window.open("label_post.php?id="+order_id);
+
+
+
+    document.querySelector('#order_id').value=''
+    document.querySelector('#download').disabled = true;
+    document.querySelector('#download').classList.remove('btn-success');
+})
+
+
+
+
+  </script>
+</body>
+
+
+</html>
